@@ -10,39 +10,55 @@ namespace ConsoleApp2
         static UserManager userManager = new UserManager(userList);
         static void Main(string[] args)
         {
-            bool isContinue = true;
-            while (isContinue)
+        startProgram:
+            try
             {
-                Console.WriteLine("1-User Log in, 2-Admin Login");
-                bool isCommand = int.TryParse(Console.ReadLine(), out int command);
-                if (isCommand)
+                bool isContinue = true;
+                while (isContinue)
                 {
-                    switch (command)
+                    Console.WriteLine("1-User Log in, 2-Admin Login\n");
+                    bool isCommand = int.TryParse(Console.ReadLine(), out int command);
+                    if (isCommand)
                     {
-                        //User section
-                        case 1:
-                            UserAccount();
-                            break;
-                        //Admin section
-                        case 2:
-                            AdminAccount();
-                            break;
-
-                        default:
-                            Console.WriteLine("Please enter true command!\n");
-                            break;
+                        switch (command)
+                        {
+                            //User section
+                            case 1:
+                                UserAccount();
+                                break;
+                            //Admin section
+                            case 2:
+                                AdminAccount();
+                                break;
+                            default:
+                                Console.WriteLine("Please enter true command!\n");
+                                break;
+                        }
+                    }
+                    else
+                    {
+                        Console.Clear();
+                        Console.WriteLine("Please enter true command!\n");
                     }
                 }
-                else
-                {
-                    Console.WriteLine("Please enter true command!\n");
-                }
             }
+            catch (FormatException)
+            {
+                Console.Clear();
+                Console.WriteLine("Enter only number!!! Please try again\n");
+                goto startProgram;
+            }catch(Exception)
+            {
+                Console.Clear();
+                Console.WriteLine("Unexpected erorr!!! Please try again:)...\n");
+                goto startProgram;
+            }
+          
         }
         // User section Start
         public static void UserAccount()
         {
-            Console.WriteLine("1-Sign up, 2-Log in, 3-Main menu");
+            Console.WriteLine("1-Sign up, 2-Log in, 3-Main menu\n");
             bool isUserChoose = int.TryParse(Console.ReadLine(), out int userChoose);
             if (isUserChoose)
             {
@@ -51,7 +67,7 @@ namespace ConsoleApp2
                     //Sign up
                     case 1:
                         SignUp();
-                        Console.WriteLine("User succsesfuly added.");
+                        Console.WriteLine("User succsesfuly added.\n");
                         break;
                     //Log in
                     case 2:
@@ -63,12 +79,14 @@ namespace ConsoleApp2
                         break;
 
                     default:
+                        Console.Clear();
                         Console.WriteLine("Please enter true command!\n");
                         break;
                 }
             }
             else
             {
+                Console.Clear();
                 Console.WriteLine("Please enter true command!\n");
             }
         }
@@ -139,15 +157,19 @@ namespace ConsoleApp2
                             Console.WriteLine("Your account is succsesfuly removed.");
                             break;
                         case 2:
+
+                            Console.Clear();
                             Console.WriteLine("Log out...");
                             break;
                         default:
+                            Console.Clear();
                             Console.WriteLine("Please enter true command!\n");
                             break;
                     }
                 }
                 else
                 {
+                    Console.Clear();
                     Console.WriteLine("Please enter true command!\n");
                 }
 
@@ -156,14 +178,14 @@ namespace ConsoleApp2
             else if (countEnter == 3)
             {
                 Console.Clear();
-                Console.WriteLine("User blocked, because 3 incorrect try.!!!");
+                Console.WriteLine("User blocked, because 3 incorrect try.!!!\n");
             }
             else
             {
 
                 Console.Clear();
                 countEnter++;
-                Console.WriteLine("Email or password incorrected!!! Please try again...");
+                Console.WriteLine("Email or password incorrected!!! Please try again...\n");
 
                 goto startLogIn;
             }
@@ -198,7 +220,7 @@ namespace ConsoleApp2
                             else
                             {
                                 Console.Clear();
-                                Console.WriteLine("List is empty...");
+                                Console.WriteLine("List is empty...\n");
                                 goto startAdminChoose;
                             }
 
@@ -208,6 +230,8 @@ namespace ConsoleApp2
                         case 2:
                             if (userList.Count != 0)
                             {
+
+                                Console.Clear();
                                 Console.WriteLine("Please enter name for remove the list:");
                                 string nameForRemove = Console.ReadLine();
                                 RemoveUserWithName(nameForRemove);
@@ -215,7 +239,7 @@ namespace ConsoleApp2
                             else
                             {
                                 Console.Clear();
-                                Console.WriteLine("List is empty...");
+                                Console.WriteLine("List is empty...\n");
                                 goto startAdminChoose;
                             }
 
@@ -223,7 +247,7 @@ namespace ConsoleApp2
                         case 3:
                             Console.Clear();
                             RemoveAllUser();
-                            Console.WriteLine("All user succesfuly removed...");
+                            Console.WriteLine("All user succesfuly removed...\n");
                             break;
                         case 4:
                             if (userList.Count != 0)
@@ -233,25 +257,27 @@ namespace ConsoleApp2
                             else
                             {
                                 Console.Clear();
-                                Console.WriteLine("List is empty...");
+                                Console.WriteLine("List is empty...\n");
                                 goto startAdminChoose;
                             }
 
                             break;
                         default:
+                            Console.Clear();
                             Console.WriteLine("Please enter true command!\n");
                             break;
                     }
                 }
                 else
                 {
+                    Console.Clear();
                     Console.WriteLine("Please enter true command!\n");
                 }
             }
             else
             {
                 Console.Clear();
-                Console.WriteLine("User blocked, because 3 incorrect try.!!!");
+                Console.WriteLine("User blocked, because 3 incorrect try.!!!\n");
             }
         }
 
@@ -341,11 +367,11 @@ namespace ConsoleApp2
 
             if (isTrue)
             {
-                message = "Succesfuly removed..";
+                message = "Succesfuly removed..\n";
             }
             else
             {
-                message = "User not find.";
+                message = "User not find.\n";
             }
 
 
