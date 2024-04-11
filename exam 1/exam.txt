@@ -1,0 +1,41 @@
+static void Main(string[] args)
+{
+    #region Task1
+    Console.WriteLine("Nomre daxil edin: ");
+    string phoneNum = Console.ReadLine();
+    List<int> digit = new List<int>();
+    int count = 0;
+
+
+
+
+    for (int j = 0; j < 10; j++)
+    {
+        if (!phoneNum.Contains(Convert.ToChar(j.ToString())))
+        {
+            digit.Add(j);
+            count++;
+        }
+
+    }
+
+    Console.WriteLine($"Count is: {count}");
+
+    foreach (var item in digit)
+    {
+        Console.WriteLine(item);
+    }
+
+
+    #endregion
+    #region Task2
+
+    //string text = "Codelandia";
+    //string textReverse = "";
+    //for (int i = text.Length-1; i >= 0; i--)
+    //{
+    //    textReverse += text[i];
+    //}
+    //Console.WriteLine(textReverse);
+    #endregion
+}
