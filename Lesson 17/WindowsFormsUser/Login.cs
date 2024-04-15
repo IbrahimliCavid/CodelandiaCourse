@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using WindowsFormsUser.Controls.Concret;
+using WindowsFormsUser.DataBase;
 using WindowsFormsUser.Entity;
 
 namespace WindowsFormsUser
@@ -36,7 +37,8 @@ namespace WindowsFormsUser
             var user = users.Find(x => (x.Email == emailOrUsername.Text || x.UserName == emailOrUsername.Text) && x.Password == loginPassword.Text);
             if (user != null)
             {
-                MessageBox.Show("Login is successfuly.");
+                MessageBox.Show("Login Succesfuly");
+                
             }
             else
             {
@@ -46,6 +48,11 @@ namespace WindowsFormsUser
 
         }
 
-
+        private void loginLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            this.Close();
+            Form1 signUp = new Form1();
+            signUp.Show();
+        }
     }
 }

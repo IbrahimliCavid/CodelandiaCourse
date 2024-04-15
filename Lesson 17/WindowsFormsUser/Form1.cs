@@ -14,6 +14,7 @@ namespace WindowsFormsUser
 {
     public partial class Form1 : Form
     {
+        Login login = new Login();
         public Form1()
         {
             InitializeComponent();
@@ -26,45 +27,17 @@ namespace WindowsFormsUser
 
         private void btnSignUp_Click(object sender, EventArgs e)
         {
-           
+
 
             if (
-                nameTxt.Text != "" &&
-                usernameTxt.Text != "" &&
-                emailTxt.Text != "" &&
-                passwordTxt.Text !=""&&
-                rePasswordTxt.Text !="" 
+                nameTxt.Text.Trim() != "" && 
+                usernameTxt.Text.Trim() != "" &&
+                emailTxt.Text.Trim() != "" &&
+                passwordTxt.Text.Trim() !=""&&
+                rePasswordTxt.Text.Trim() !="" 
                )
             {
-                if (robotCheck.Checked)
-                {
-                    if (passwordTxt.Text == rePasswordTxt.Text)
-                    {
-                        User newUser = new User()
-                        {
-                            Name = nameTxt.Text,
-                            UserName = usernameTxt.Text,
-                            Email = emailTxt.Text,
-                            Password = passwordTxt.Text
-                        };
-
-                        UserManager.Instance.Add(newUser);
-                      
-                        Login login = new Login();
-                        login.Show();
-                    }
-                    else
-                    {
-                        passwordTxt.Text = "";
-                        rePasswordTxt.Text = "";
-                        MessageBox.Show("The repassword is not correct");
-                    }
-                    
-                }
-                else
-                {
-                    MessageBox.Show("Prove you're not a robot!!!");
-                }
+                IsChecked(); 
             }
             else
             {
@@ -72,11 +45,48 @@ namespace WindowsFormsUser
             }
         }
 
+        private void IsChecked()
+        {
+            if (robotCheck.Checked)
+            {
+
+                PasswordControl();
+            }
+            else
+            {
+                MessageBox.Show("Prove you're not a robot!!!");
+            }
+        }
+
+        private void PasswordControl()
+        {
+            if (passwordTxt.Text == rePasswordTxt.Text)
+            {
+                this.Hide();
+                login.Show();
+                User newUser = new User()
+                {
+                    Name = nameTxt.Text,
+                    UserName = usernameTxt.Text,
+                    Email = emailTxt.Text,
+                    Password = passwordTxt.Text
+                };
+
+
+                UserManager.Instance.Add(newUser);
+              
+            }
+            else
+            {
+                passwordTxt.Text = "";
+                rePasswordTxt.Text = "";
+                MessageBox.Show("The repassword is not correct!!!");
+            }
+        }
         private void loginLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             
-           
-            Login login = new Login();
+            this.Hide();
             login.Show();
         }
     }

@@ -3,21 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WindowsFormsUser.DataBase;
 
 namespace WindowsFormsUser.Entity
 {
-    public class Account
+    public class Account 
     {
-        private User _account;
-
-        public Account(User account)
+        public User Profile { get; set; }
+        public Account(User user)
         {
-            _account = account;
+            Profile = user;
         }
 
-        public User getAccount()
-        {
-            return _account;
-        }
     }
 }
