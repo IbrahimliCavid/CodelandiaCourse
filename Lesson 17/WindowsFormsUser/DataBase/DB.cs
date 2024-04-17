@@ -20,6 +20,15 @@ namespace WindowsFormsUser.DataBase
             }
         }
 
-      public List<User> users = new List<User>();
+      public List<User> users = new List<User>()
+      {
+          new User()
+          {
+              Name = "cavid",
+              UserName = "admin",
+              Password = "admin",
+              Email = "ibrahimli.dev@gmail.com"
+          }
+      };
     }
 }

@@ -27,7 +27,7 @@ namespace WindowsFormsUser
 
         private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            this.Close();
+            Application.Exit();
         }
 
         private void btnLogin_Click(object sender, EventArgs e)
@@ -37,8 +37,19 @@ namespace WindowsFormsUser
             var user = users.Find(x => (x.Email == emailOrUsername.Text || x.UserName == emailOrUsername.Text) && x.Password == loginPassword.Text);
             if (user != null)
             {
-                MessageBox.Show("Login Succesfuly");
-                
+                if (emailOrUsername.Text == "admin" && loginPassword.Text == "admin")
+                {
+                    this.Hide();
+                    AdminForm admin = new AdminForm();
+                    admin.Show();
+                }
+                else
+                {
+                    MessageBox.Show("Login Succesfuly");
+                }
+
+
+
             }
             else
             {
@@ -50,7 +61,7 @@ namespace WindowsFormsUser
 
         private void loginLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            this.Close();
+            this.Hide();
             Form1 signUp = new Form1();
             signUp.Show();
         }

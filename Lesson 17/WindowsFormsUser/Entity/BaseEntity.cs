@@ -8,6 +8,6 @@ namespace WindowsFormsUser.Entity
 {
     public class BaseEntity
     {
-        readonly string ID = Guid.NewGuid().ToString();
+       public readonly string ID = Guid.NewGuid().ToString();
     }
 }

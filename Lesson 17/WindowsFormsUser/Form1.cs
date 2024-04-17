@@ -22,7 +22,7 @@ namespace WindowsFormsUser
 
         private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            this.Close();
+            Application.Exit();
         }
 
         private void btnSignUp_Click(object sender, EventArgs e)
@@ -49,7 +49,6 @@ namespace WindowsFormsUser
         {
             if (robotCheck.Checked)
             {
-
                 PasswordControl();
             }
             else
