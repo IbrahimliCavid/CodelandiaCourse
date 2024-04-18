@@ -46,6 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Account.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Account.Designer.cs">
+      <DependentUpon>Account.cs</DependentUpon>
+    </Compile>
     <Compile Include="AdminForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -56,7 +62,7 @@
     <Compile Include="Controls\Abstract\IUserOperation.cs" />
     <Compile Include="Controls\Concret\UserManager.cs" />
     <Compile Include="DataBase\DB.cs" />
-    <Compile Include="Entity\Account.cs" />
+    <Compile Include="Entity\UserAccount.cs" />
     <Compile Include="Entity\BaseEntity.cs" />
     <Compile Include="Entity\User.cs" />
     <Compile Include="Form1.cs">
@@ -73,6 +79,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Account.resx">
+      <DependentUpon>Account.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="AdminForm.resx">
       <DependentUpon>AdminForm.cs</DependentUpon>
     </EmbeddedResource>

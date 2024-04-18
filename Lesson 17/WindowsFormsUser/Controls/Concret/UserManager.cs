@@ -41,12 +41,13 @@ namespace WindowsFormsUser.Controls.Concret
 
         public void RemoveAll()
         {
-            throw new NotImplementedException();
+            DB.Instance.users.Clear();
         }
 
         public void RemoveById(string id)
         {
-            throw new NotImplementedException();
+            var user = DB.Instance.users.Find(x => x.ID == id);
+            DB.Instance.users.Remove(user);
         }
 
         public void UpdateById(string id)

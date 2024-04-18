@@ -113,34 +113,24 @@ namespace WindowsFormsUser
             Application.Exit();
         }
 
-       
+
 
         private void RemoveRow(object sender, DataGridViewCellEventArgs e)
         {
-            try
-            {
-                
-                userTable.Rows.RemoveAt(e.RowIndex);
-            }
-            catch (Exception)
-            {
-
-                MessageBox.Show("The table you want to delete is empty!!!");
-            }
-               
-           
+            UserManager.Instance.RemoveAll();
+            userTable.Rows.Clear();
         }
 
-        private User FindUser()
+        private User SearchUser()
         {
             var users = DB.Instance.users;
-            User userFind = users.Find(x => x.UserName == userNameByAdmin.Text || x.Email == emailByAdmin.Text);
+            User userFind = users.Find(x => x.UserName == searchUserInput.Text);
             return userFind;
         }
-        private void getUser_Click( object sender, EventArgs e)
+        private void getUser_Click(object sender, EventArgs e)
         {
 
-            User user = FindUser();
+            User user = SearchUser();
             if (user != null)
             {
                 nameByAdmin.Text = user.Name;
@@ -148,25 +138,22 @@ namespace WindowsFormsUser
                 emailByAdmin.Text = user.Email;
                 passByAdmin.Text = user.Password;
                 rePassByAdmin.Text = user.Password;
-               
+
             }
             else
             {
 
                 MessageBox.Show("User not defind!!!");
-                
+
             }
-            user = user;
+
         }
 
-        private void ClearIputBtn_Click(object sender, EventArgs e)
-        {
-            ClearAllInput();
-        }
 
-        private void update_Click(object sender, EventArgs e)
+
+        private void btnUpdate_Click(object sender, EventArgs e)
         {
-            User user = FindUser();
+            User user = SearchUser();
             if (user != null)
             {
                 if (passByAdmin.Text == rePassByAdmin.Text)
@@ -176,19 +163,49 @@ namespace WindowsFormsUser
                     user.UserName = userNameByAdmin.Text;
                     user.Password = passByAdmin.Text;
                     WriteToTable();
-                    
+
+                    ClearAllInput();
+
                 }
                 else
                 {
                     MessageBox.Show("Repassword is incorrect!!!");
                 }
             }
+
+
+
+        }
+
+
+
+        private void DeleteInputBtn_Click(object sender, EventArgs e)
+        {
+            var user = DB.Instance.users.Find(x => x.UserName == searchUserInput.Text);
+
+            if (user != null)
+            {
+                UserManager.Instance.RemoveById(user.ID);
+                WriteToTable();
+                ClearAllInput();
+                MessageBox.Show("User succesfuly deleted...");
+            }
             else
             {
-                MessageBox.Show("Fill in the information completely!!!");
+                MessageBox.Show("User not defind!!!");
             }
+        }
 
-            ClearAllInput();
+        private void removeAllUserBtn_Click(object sender, EventArgs e)
+        {
+            UserManager.Instance.RemoveAll();
+        }
+
+        private void back_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            this.Hide();
+            Login login = new Login();
+            login.Show();
         }
     }
 }

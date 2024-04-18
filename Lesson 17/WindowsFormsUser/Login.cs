@@ -35,27 +35,34 @@ namespace WindowsFormsUser
 
             List<User> users = UserManager.Instance.GetAll();
             var user = users.Find(x => (x.Email == emailOrUsername.Text || x.UserName == emailOrUsername.Text) && x.Password == loginPassword.Text);
-            if (user != null)
+
+
+            if (emailOrUsername.Text == "admin" && loginPassword.Text == "admin")
             {
-                if (emailOrUsername.Text == "admin" && loginPassword.Text == "admin")
-                {
-                    this.Hide();
-                    AdminForm admin = new AdminForm();
-                    admin.Show();
-                }
-                else
-                {
-                    MessageBox.Show("Login Succesfuly");
-                }
-
-
-
+                this.Hide();
+                AdminForm admin = new AdminForm();
+                admin.Show();
             }
             else
             {
 
-                MessageBox.Show("Username or password incorrect!!!");
+                if (user != null)
+                {
+                    UserAccount.Instance.user = user;
+                    this.Hide();
+                    Account account = new Account();
+                    account.Show();
+
+                }
+                else
+                {
+
+                    MessageBox.Show("Username or password incorrect!!!");
+                }
+              
             }
+
+         
 
         }
 
