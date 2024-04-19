@@ -199,6 +199,7 @@ namespace WindowsFormsUser
         private void removeAllUserBtn_Click(object sender, EventArgs e)
         {
             UserManager.Instance.RemoveAll();
+            WriteToTable();
         }
 
         private void back_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

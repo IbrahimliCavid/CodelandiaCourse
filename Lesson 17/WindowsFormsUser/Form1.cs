@@ -28,6 +28,7 @@ namespace WindowsFormsUser
         private void btnSignUp_Click(object sender, EventArgs e)
         {
 
+           
 
             if (
                 nameTxt.Text.Trim() != "" && 
@@ -45,11 +46,32 @@ namespace WindowsFormsUser
             }
         }
 
+
+
+
+        private bool EmailControl()
+        {
+            if (emailTxt.Text.Contains("@") && emailTxt.Text.Contains("."))
+            {
+                return true;
+            }
+            return false;
+        }
+
         private void IsChecked()
         {
+            bool emailControl = EmailControl();
             if (robotCheck.Checked)
             {
-                PasswordControl();
+                if (emailControl)
+                {
+                    PasswordControl();
+                }
+                else
+                {
+                    MessageBox.Show("Emiail is not valid!!!");
+                }
+                
             }
             else
             {
