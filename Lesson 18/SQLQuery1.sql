@@ -1,6 +1,6 @@
 ﻿use LibraryDB
 
---select * from Books
+select * from Books
 
 --insert into  Books(BookName, BookAuthor, PageOfBook, PriceOfBook, YearOfPublication)
 --values('Bu şəhərdə kimsə yoxdur', 'Rövşən Abdullaoğlu', '346', '11.9', '2011')
@@ -34,16 +34,19 @@
 --from Books
 --join Libraries on Books.BookID = libraries.BookId
 
+
 create view BooksCountAtLibrary as
 select libraries.libraryName, books.bookName, libraries.BookCount
 from Books
 join Libraries on Books.BookID = Libraries.bookID
 
 
-select * from books
 select * from Libraries
 select * from booksview
 select * from Librariesview
 select * from BooksCountAtLibrary
 where BooksCountAtLibrary.bookcount > 0
 order by BooksCountAtLibrary.bookcount;
+
+select * from books
+select  max(PriceOfBook) as [Price Of Book], BookAuthor as [Book author] from books group by  BookAuthor 
