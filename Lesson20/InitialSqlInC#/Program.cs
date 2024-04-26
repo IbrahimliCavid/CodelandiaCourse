@@ -102,7 +102,7 @@ namespace InitialSqlInC_
 
         public static void AddBooks(string connectionString)
         {
-            ViewAllAuthors(connectionString);
+            ViewAllAuthors(connectionString); 
             Console.WriteLine("\n\nPlease enter book name");
             string name = Console.ReadLine();
             Console.WriteLine("Please enter book page");
