@@ -15,5 +15,7 @@ namespace UserManagmentSQL.Entity
         public string Email { get; set; }
 
         public string Password { get; set; }
+
+        public int Role { get; set; } = DefaultValues.DefaultValue.DFAULT_USER_ROLL_ID;
     }
 }

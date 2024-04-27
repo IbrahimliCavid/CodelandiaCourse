@@ -8,6 +8,6 @@ namespace UserManagmentSQL.DefaultValues
 {
     public static class DefaultValue
     {
-        public static int DefaultRole = 1;
+        public static readonly int DFAULT_USER_ROLL_ID = 1;
     }
 }

@@ -43,7 +43,7 @@ namespace UserManagmentSQL.DataAccess.Concret
                     cmd.Parameters.AddWithValue("@UserName", entity.UserName);
                     cmd.Parameters.AddWithValue("@Email", entity.Email);
                     cmd.Parameters.AddWithValue("@Password", entity.Password);
-                    cmd.Parameters.AddWithValue("@RoleID", DefaultValue.DefaultRole);
+                    cmd.Parameters.AddWithValue("@RoleID", entity.Role);
                     cmd.ExecuteNonQuery();
                 }
             }
@@ -90,6 +90,9 @@ namespace UserManagmentSQL.DataAccess.Concret
                         user.UserName = Convert.ToString(reader["UserName"]);
                         user.Email = Convert.ToString(reader["Email"]);
                         user.Password = Convert.ToString(reader["Password"]);
+                        user.Role = Convert.ToInt32(reader["RoleID"]);
+                        user.Deleted = Convert.ToInt32(reader["IsDeleted"]);
+                        user.CreateDate = Convert.ToDateTime(reader["CreateDate"]);
 
                     }
 
@@ -118,10 +121,15 @@ namespace UserManagmentSQL.DataAccess.Concret
                             Name = Convert.ToString(reader["Name"]),
                             UserName = Convert.ToString(reader["UserName"]),
                             Email = Convert.ToString(reader["Email"]),
-                            Password = Convert.ToString(reader["Password"])
+                            Password = Convert.ToString(reader["Password"]),
+                            Role = Convert.ToInt32(reader["RoleID"]),
+                            Deleted = Convert.ToInt32(reader["IsDeleted"]),
+                            CreateDate = Convert.ToDateTime(reader["CreateDate"])
                         };
                         userList.Add(user);
                     }
+
+                    return userList;
                 }
 
             }
@@ -129,7 +137,31 @@ namespace UserManagmentSQL.DataAccess.Concret
 
         public void Update(User entity)
         {
-            throw new NotImplementedException();
+            using (SqlConnection connection = new(_connection))
+            {
+                connection.Open();
+
+                string cmdText = @"update  users 
+                                   set Name = @Name, 
+                                       UserName = @UserName, 
+                                       Email = @Email,  
+                                       Password = @Password,  
+                                       RoleID = @RoleID,  
+                                       IsDeleted = IsDeleted
+                                   where Id = @ID";
+
+                using (SqlCommand cmd = new(cmdText, connection))
+                {
+                    cmd.Parameters.AddWithValue("@Name", entity.Name);
+                    cmd.Parameters.AddWithValue("@UserName", entity.UserName);
+                    cmd.Parameters.AddWithValue("@Email", entity.Email);
+                    cmd.Parameters.AddWithValue("@Password", entity.Password);
+                    cmd.Parameters.AddWithValue("@RoleID", entity.Role);
+                    cmd.Parameters.AddWithValue("@IsDeleted", entity.Deleted);
+                    cmd.Parameters.AddWithValue("@ID", entity.Id);
+                    cmd.ExecuteNonQuery();
+                }
+            }
         }
 
     }
