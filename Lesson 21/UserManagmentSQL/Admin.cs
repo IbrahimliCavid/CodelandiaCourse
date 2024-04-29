@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.VisualBasic.ApplicationServices;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -9,53 +10,33 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using UserManagmentSQL.DataAccess.Concret;
 using UserManagmentSQL.Entity;
+using User = UserManagmentSQL.Entity.User;
 
 namespace UserManagmentSQL
 {
     public partial class Admin : Form
     {
-       
+
         public Admin()
         {
             InitializeComponent();
-            
+
         }
 
         private void Admin_Load(object sender, EventArgs e)
         {
             UserRepository userRepository = new();
-           
+
             List<User> users = userRepository.Get();
             WriteToTable(users);
         }
 
-        private void WriteToTable(List<User> users)
+        private void WriteToTable<T>(List<T> item)
         {
-           
 
-            userTable.Rows.Clear();
-            if (userTable.Rows.Count < users.Count)
-                userTable.Rows.Add(users.Count - userTable.Rows.Count);
 
-            int i = 0;
-            foreach (var item in users)
-            {
-                if (item.Role != 2)
-                {
-                    userTable.Rows[i].Cells[0].Value = item.Id;
-                    userTable.Rows[i].Cells[1].Value = item.Name;
-                    userTable.Rows[i].Cells[2].Value = item.UserName;
-                    userTable.Rows[i].Cells[3].Value = item.Email;
-                    userTable.Rows[i].Cells[4].Value = item.Password;
-                    userTable.Rows[i].Cells[5].Value = item.Deleted;
-                    userTable.Rows[i].Cells[6].Value = item.CreateDate;
-                    i++;
-                }
-                else
-                {
-                    continue;
-                }
-            }
+            userTable.DataSource = null;
+            userTable.DataSource = item;
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -97,18 +78,16 @@ namespace UserManagmentSQL
             x.Email == textBoxSearch.Text
             );
 
-
-
             if (user != null)
             {
-                    textBoxName.Text = user.Name;
-                    textBoxSurname.Text = user.UserName;
-                    textBoxRepassword.Text = user.Password;
-                    textBoxRole.Text = Convert.ToString(user.Role);
-                    textBoxEmail.Text = user.Email;
-                    textBoxPassword.Text = user.Password;
-                    WriteToTable(users);
-                if (user.Deleted !=0)
+                textBoxName.Text = user.Name;
+                textBoxSurname.Text = user.UserName;
+                textBoxRepassword.Text = user.Password;
+                textBoxRole.Text = Convert.ToString(user.Role);
+                textBoxEmail.Text = user.Email;
+                textBoxPassword.Text = user.Password;
+                WriteToTable(users);
+                if (user.Deleted != 0)
                 {
                     MessageBox.Show("Not!!!\n User was deleted!!!");
                 }
@@ -152,7 +131,7 @@ namespace UserManagmentSQL
         private void btnUpdate_Click(object sender, EventArgs e)
         {
             UserRepository userRepository = new();
-            
+
             if (textBoxPassword.Text == textBoxRepassword.Text)
             {
                 User user = new()
@@ -172,11 +151,17 @@ namespace UserManagmentSQL
                 MessageBox.Show("Password incorrected!!!");
             }
 
-           
-
-            
 
 
+
+
+
+        }
+
+        private void ShowRole_Click(object sender, EventArgs e)
+        {
+            List<Role> roles = new List<Role>();
+            WriteToTable(roles);
         }
     }
 }

@@ -13,10 +13,10 @@ namespace EF_Core_Code_First_Books_Project.DataAccess.Concret
     {
         private BookManagmentDbContex _dbContex = new();
 
-       
+
         public void Add(Nationality entity)
         {
-          
+
             _dbContex.Nationalities.Add(entity);
             _dbContex.SaveChanges();
         }
@@ -27,9 +27,9 @@ namespace EF_Core_Code_First_Books_Project.DataAccess.Concret
             if (nationality != null)
             {
                 _dbContex.Nationalities.Remove(nationality);
-            _dbContex.SaveChanges();
+                _dbContex.SaveChanges();
             }
-            
+
         }
 
         public void DeleteAll()
@@ -43,9 +43,9 @@ namespace EF_Core_Code_First_Books_Project.DataAccess.Concret
 
         public Nationality Get(int id)
         {
-           Nationality nationality = _dbContex.Nationalities.Find(id);
+            Nationality nationality = _dbContex.Nationalities.Find(id);
             return nationality;
-            
+
         }
 
         public List<Nationality> GetAll()
@@ -57,7 +57,6 @@ namespace EF_Core_Code_First_Books_Project.DataAccess.Concret
         public void Update(Nationality entity)
         {
             _dbContex.Nationalities.Update(entity);
-
             _dbContex.SaveChanges();
         }
     }

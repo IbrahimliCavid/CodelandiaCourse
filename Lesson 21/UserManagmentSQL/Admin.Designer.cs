@@ -29,13 +29,6 @@
         private void InitializeComponent()
         {
             userTable = new DataGridView();
-            Id = new DataGridViewTextBoxColumn();
-            Name = new DataGridViewTextBoxColumn();
-            UserName = new DataGridViewTextBoxColumn();
-            Email = new DataGridViewTextBoxColumn();
-            UserPassword = new DataGridViewTextBoxColumn();
-            Deleted = new DataGridViewTextBoxColumn();
-            CreatedDate = new DataGridViewTextBoxColumn();
             textBoxRepassword = new TextBox();
             lblRepassword = new Label();
             textBoxEmail = new TextBox();
@@ -53,6 +46,7 @@
             textBoxSearch = new TextBox();
             btnDelete = new Button();
             btnUpdate = new Button();
+            ShowRole = new Button();
             ((System.ComponentModel.ISupportInitialize)userTable).BeginInit();
             SuspendLayout();
             // 
@@ -60,46 +54,10 @@
             // 
             userTable.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             userTable.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            userTable.Columns.AddRange(new DataGridViewColumn[] { Id, Name, UserName, Email, UserPassword, Deleted, CreatedDate });
             userTable.Location = new Point(-2, 298);
             userTable.Name = "userTable";
             userTable.Size = new Size(803, 150);
             userTable.TabIndex = 0;
-            // 
-            // Id
-            // 
-            Id.HeaderText = "Id";
-            Id.Name = "Id";
-            // 
-            // Name
-            // 
-            Name.HeaderText = "Name";
-            Name.Name = "Name";
-            // 
-            // UserName
-            // 
-            UserName.HeaderText = "User Name";
-            UserName.Name = "UserName";
-            // 
-            // Email
-            // 
-            Email.HeaderText = "Email";
-            Email.Name = "Email";
-            // 
-            // UserPassword
-            // 
-            UserPassword.HeaderText = "Password";
-            UserPassword.Name = "UserPassword";
-            // 
-            // Deleted
-            // 
-            Deleted.HeaderText = "Deleted";
-            Deleted.Name = "Deleted";
-            // 
-            // CreatedDate
-            // 
-            CreatedDate.HeaderText = "CreatedDate";
-            CreatedDate.Name = "CreatedDate";
             // 
             // textBoxRepassword
             // 
@@ -246,11 +204,22 @@
             btnUpdate.UseVisualStyleBackColor = true;
             btnUpdate.Click += btnUpdate_Click;
             // 
+            // ShowRole
+            // 
+            ShowRole.Location = new Point(539, 135);
+            ShowRole.Name = "ShowRole";
+            ShowRole.Size = new Size(138, 25);
+            ShowRole.TabIndex = 33;
+            ShowRole.Text = "Show Role";
+            ShowRole.UseVisualStyleBackColor = true;
+            ShowRole.Click += ShowRole_Click;
+            // 
             // Admin
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(ShowRole);
             Controls.Add(btnUpdate);
             Controls.Add(btnDelete);
             Controls.Add(textBoxSearch);
@@ -269,6 +238,7 @@
             Controls.Add(textBoxName);
             Controls.Add(lblName);
             Controls.Add(userTable);
+            Name = "Admin";
             Text = "Admin";
             Load += Admin_Load;
             ((System.ComponentModel.ISupportInitialize)userTable).EndInit();
@@ -289,11 +259,6 @@
         private Label lblUserName;
         private TextBox textBoxName;
         private Label lblName;
-        private DataGridViewTextBoxColumn Id;
-        private DataGridViewTextBoxColumn Name;
-        private DataGridViewTextBoxColumn UserName;
-        private DataGridViewTextBoxColumn Email;
-        private DataGridViewTextBoxColumn UserPassword;
         private Button btnAdd;
         private TextBox textBoxSearchUsers;
         private TextBox textBoxRole;
@@ -307,7 +272,6 @@
         private Button button1;
         private Button btnDelete;
         private Button btnUpdate;
-        private DataGridViewTextBoxColumn Deleted;
-        private DataGridViewTextBoxColumn CreatedDate;
+        private Button ShowRole;
     }
 }

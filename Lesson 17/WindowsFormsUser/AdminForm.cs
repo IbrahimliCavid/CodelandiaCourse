@@ -78,7 +78,8 @@ namespace WindowsFormsUser
 
         private void AdminForm_Load(object sender, EventArgs e)
         {
-            WriteToTable();
+            userTable.Columns.Clear();
+            //WriteToTable();
         }
 
         private void WriteToTable()
